@@ -3,6 +3,7 @@ package cn.com.pfinfo.demo.base.listener;
 import cn.com.pfinfo.demo.annotation.*;
 import cn.com.pfinfo.demo.base.cache.ControllerMapCache;
 import cn.com.pfinfo.demo.util.NullUtil;
+import com.sun.istack.internal.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,6 +65,8 @@ public class ContextRefreshedListener implements ApplicationListener<ContextRefr
             if (ControllerMapCache.getInstance().getCache().containsKey(key)) {
                 String msg = String.format("method %s 上的注解路径 %s [%s]已存在，不能添加到映射！！！",method.getName(),urlAnnnotation.url(),methodType.name());
                 throw new IllegalStateException(msg);
+
+
             }
             Map<String, Object> map = new HashMap<>(2);
             map.put(ControllerMapCache.Constant.BEAN, bean);

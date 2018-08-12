@@ -27,5 +27,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UrlResolver {
     String url() default "";
-    RequestMethod[] method() default {};
+    RequestMethod[] method() default {RequestMethod.GET};
 }
